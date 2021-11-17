@@ -9,13 +9,13 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Tares</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Categorias</a>
+          <li class="nav-item {% if request.path == url %}active{% endif %}">
+            <a href="{% url 'categories' %}" class="nav-link ">Categorias</a>
           </li>
         </ul>
         <div class="d-flex">
