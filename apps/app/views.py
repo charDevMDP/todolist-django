@@ -10,9 +10,12 @@ def home(request):
 
 
 def register(request):
+    data = { 'form': UserRegisterForm() }
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            form.save()
             return redirect("home")
-    else:
-        return render(request, "registration/register.html")
+        data['form'] = form
+
+    return render(request, "registration/register.html", data)
