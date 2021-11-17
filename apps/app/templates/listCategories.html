@@ -10,7 +10,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th colspan="2">Opciones</th>
+                    <th>Descripcion</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,8 +18,7 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ c.nombre }}</td>
-                    <td><a href="edicionCurso/{{c.codigo}}" class="btn btn-info btn-edit">Editar</a></td>
-                    <td><a href="eliminarCurso/{{c.codigo}}" class="btn btn-danger btn-delete" id="btnDelete">Eliminar</a></td>
+                    <td>{{ c.description }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -10,6 +10,7 @@ def home(request):
     return render(request, "home.html")
 
 def Categories(request):
+    # traigo todas las categorias de la db
     categoriesList = Category.objects.all();
     return render(request, 'listCategories.html', { 'listCat': categoriesList})
 
