@@ -1,0 +1,44 @@
+{% extends "./base.html" %}
+
+{% block body %}
+<div class="">
+    <div class="d-flex align-items-center">
+        <h1>Listado de Categorias</h1>
+        <div class="mx-2">
+            <a href="{% url 'addCategory' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="" style="height: 40px;" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+              </svg>
+            </a>
+        </div>
+    </div>
+
+    {% if listCat %}
+    <div class="table-responsive py-2">
+        <table class="table table-striped tablaG">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in listCat %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center mt-5">
+        <p>TODAVIA NO HAY CATEGORIAS CARGADAS</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
