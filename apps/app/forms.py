@@ -5,6 +5,7 @@ from django.forms import fields
 from .models import Category
 
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label="Contraseña",widget=forms.PasswordInput)
@@ -22,3 +23,4 @@ class CategoryForm(forms.ModelForm):
         fields = ['name', 'description']
         #fields = '__all__'
         labels = { 'name': ('Nombre de la categoria'), 'description': ('Breve descripcion')}
+        help_texts = {k:'' for k in fields}

@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, CategoryForm
-
 from apps.app.models import Category
 
 # Create your views here.
@@ -25,6 +24,7 @@ def addCategory(request):
         data['form'] = form
 
     return render(request, 'addCategory.html', data)
+
 
 def register(request):
     data = { 'form': UserRegisterForm() }
