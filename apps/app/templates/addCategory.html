@@ -2,26 +2,15 @@
 
 {% block body %}
 
+{% load crispy_forms_tags %}
 <div>
     <h1>Agregar Categoria</h1>
 
     <div class="card mt-5">
     <div class="card-body">
-        <form action="/addCategory/" method="POST">{% csrf_token %}
-            <div class="form-group">
-                <input 
-                type="text" 
-                id="catName" 
-                name='catName' 
-                class="form-control"
-                placeholder="Nombre"
-                maxlength="50"
-                required
-                >
-        </div>
-    </div>
-
-
+        <form action="" method="POST">{% csrf_token %}
+           
+            {{ form | crispy }}
 
          <div class="form-group mx-4 mb-2">
             <button 

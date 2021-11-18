@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, CategoryForm
 from django.contrib.auth import authenticate, login
 
 from apps.app.models import Category
@@ -14,14 +14,17 @@ def Categories(request):
     categoriesList = Category.objects.all();
     return render(request, 'listCategories.html', { 'listCat': categoriesList})
 
-def addCategory(request):
-    name = request.POST['catName'];
-    category = Category.objects.create(name=name);
-    return redirect('categories')
 
-def addCategoryForm(request):
-    categoriesList = Category.objects.all();
-    return render(request, 'addCategory.html', { 'listCat': categoriesList})
+def addCategory(request):
+    data = { 'form': CategoryForm()}
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('categories')
+        data['form'] = form
+
+    return render(request, 'addCategory.html', data)
 
 def register(request):
     data = { 'form': UserRegisterForm() }
