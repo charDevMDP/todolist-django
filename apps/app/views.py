@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import UserRegisterForm, CategoryForm
-from apps.app.models import Category
+from .forms import UserRegisterForm, CategoryForm, TaskForm
+from apps.app.models import Category, Task
 
 # Create your views here.
 
@@ -45,3 +45,21 @@ def register(request):
 
     # sino entre como get normal
     return render(request, "registration/register.html", data)
+
+
+def Tasks(request):
+    # traigo todas las tareas de la db
+    tasksList = Task.objects.all();
+    return render(request, 'listTasks.html', { 'listTask': tasksList})
+
+
+def addTask(request):
+    data = { 'form': TaskForm()}
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+        data['form'] = form
+
+    return render(request, 'addTask.html', data)
