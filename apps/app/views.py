@@ -56,7 +56,7 @@ def Tasks(request):
 
 def addTask(request):
     formTask = TaskForm()
-    formTask.fields['owner'].queryset = User.objects.all().filter(is_superuser = False)
+    #formTask.fields['owner'].queryset = User.objects.all().filter(is_superuser = False)
     print(formTask.fields)
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -71,3 +71,19 @@ def deleteTask(request, id):
     task = get_object_or_404(Task, id=id)
     task.delete();
     return redirect(to='tasks')
+
+def updateTask(request,id):
+    #buscar tarea veficando que exista
+    task = get_object_or_404(Task,id=id)
+    #creo el formulario y lo relleno con la tarea encontrada
+    formTask = TaskForm(instance=task)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST,instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+        formTask['form'] = form
+
+
+    return render(request, 'updateTask.html', { 'form': formTask })

@@ -14,14 +14,13 @@
     </div>
 
     {% if listTask %}
-    <div class="table-responsive py-2">
+   <!-- <div class="table-responsive py-2">
         <table class="table table-striped tablaG">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Estado</th>
-                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,12 +29,39 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ t.title }}</td>
                     <td>{{ t.state }}</td>
-                    <td><a href="{% url 'deleteTask' t.id %}">eliminar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>-->
+
+    <div class="row mt-5">
+        {% for t in listTask %}
+
+        <div class="card border-secondary mb-3 mx-2" style="max-width: 18rem;">
+            
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>{{ t.state }}</div>
+                    <div class="p-1 rounded-pill px-2" style="background-color: #ccc;">#{{ t.category }}</div>
+                </div>
+            </div>
+
+            <div class="card-body text-secondary">
+              <h5 class="card-title">{{ t.title }}</h5>
+              <p class="card-text">{{ t.description }}</p>
+            </div>
+
+            <div class="card-footer d-flex justify-content-around" style="bottom: 0px;" >
+              <a href="{% url 'updateTask' t.id %}" class="btn btn-info btn-sm">Editar</a>
+              <a href="{% url 'deleteTask' t.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </div>
+
+          </div>
+
+        {% endfor %}
     </div>
+
     {% else %}
     <div class="text-center mt-5">
         <p>TODAVIA NO HAY TAREAS CARGADAS</p>
