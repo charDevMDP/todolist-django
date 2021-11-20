@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, CategoryForm, TaskForm
 from apps.app.models import Category, Task
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -54,12 +55,14 @@ def Tasks(request):
 
 
 def addTask(request):
-    data = { 'form': TaskForm()}
+    formTask = TaskForm()
+    formTask.fields['owner'].queryset = User.objects.all().filter(is_superuser = False)
+    print(formTask.fields)
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('tasks')
-        data['form'] = form
+        formTask['form'] = form
 
-    return render(request, 'addTask.html', data)
+    return render(request, 'addTask.html', { 'form': formTask })

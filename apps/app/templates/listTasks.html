@@ -13,20 +13,22 @@
         </div>
     </div>
 
-    {% if listCat %}
+    {% if listTask %}
     <div class="table-responsive py-2">
         <table class="table table-striped tablaG">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Descripcion</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
-                {% for c in listTask %}
+                {% for t in listTask %}
                 <tr>
-                    <td></td>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ t.title }}</td>
+                    <td>{{ t.state }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

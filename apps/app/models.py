@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 options_state = [
-    [0, 'por hacer'],
-    [1, 'en curso'],
-    [2, 'hecho']
+    ('Por Hacer', 'por hacer'),
+    ('En Curso', 'en curso'),
+    ('Hecho', 'hecho')
 ]
 
 # Create your models here.
@@ -23,7 +23,7 @@ class Task(models.Model):
     category=models.ForeignKey(Category, on_delete=models.PROTECT, null=False)
     owner=models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     create_at=models.DateTimeField(auto_now_add=True)
-    state=models.IntegerField(choices=options_state)
+    state=models.CharField(max_length=15,choices=options_state)
 
     def __str__(self):
         return self.title
