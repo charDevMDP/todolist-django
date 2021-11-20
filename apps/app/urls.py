@@ -9,4 +9,5 @@ urlpatterns = [
     path('addCategory/', views.addCategory, name='addCategory'),
     path('tasks/', login_required(views.Tasks), name='tasks'),
     path('addTasks/', views.addTask, name='addTask'),
+    path('deleteTask/<id>/', views.deleteTask, name='deleteTask'),
 ]

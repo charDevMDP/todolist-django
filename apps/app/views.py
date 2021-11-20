@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, CategoryForm, TaskForm
 from apps.app.models import Category, Task
@@ -66,3 +66,8 @@ def addTask(request):
         formTask['form'] = form
 
     return render(request, 'addTask.html', { 'form': formTask })
+
+def deleteTask(request, id):
+    task = get_object_or_404(Task, id=id)
+    task.delete();
+    return redirect(to='tasks')
