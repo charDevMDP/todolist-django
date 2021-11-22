@@ -26,7 +26,11 @@ class CategoryForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
+    title = forms.CharField(label='Titulo')
+    description = forms.CharField(label='Descripcion')
+    #category = forms.ChoiceField(label='Seleccione una categoria',widget=forms.Select)
+    #state = forms.ChoiceField(label='Elige el estado inicial de la tarea')
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['title', 'description', 'category', 'state' ]
         help_texts = {k: '' for k in fields}

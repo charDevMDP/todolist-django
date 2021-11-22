@@ -49,19 +49,30 @@ def register(request):
 
 
 def Tasks(request):
-    # traigo todas las tareas de la db
-    tasksList = Task.objects.all();
+    # guardo usuario actual
+    current_user = request.user
+    # accedo a todas la tareas de ese usuario
+    tasksList = current_user.tasks.all()
+
+    # traigo todas las tareas de la db - antes
+    #tasksList = Task.objects.all(); - antes ahora traigo solo los del usuario
+
     return render(request, 'listTasks.html', { 'listTask': tasksList})
 
 
 def addTask(request):
     formTask = TaskForm()
-    #formTask.fields['owner'].queryset = User.objects.all().filter(is_superuser = False)
-    print(formTask.fields)
+    #verificar si hay usuario y la guardo para configurarselo a la tarea 
+    current_user = get_object_or_404(User, pk=request.user.pk)
+
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            # commit falso, porque hay que config el usuario owner
+            task = form.save(commit=False)
+            # asignamos el usuario logueado a la tarea
+            task.owner = current_user
+            task.save()
             return redirect('tasks')
         formTask['form'] = form
 

@@ -21,7 +21,7 @@ class Task(models.Model):
     title=models.CharField(max_length=50)
     description=models.TextField()
     category=models.ForeignKey(Category, on_delete=models.PROTECT, null=False)
-    owner=models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    owner=models.ForeignKey(User, on_delete=models.CASCADE, null=False, related_name='tasks')
     create_at=models.DateTimeField(auto_now_add=True)
     state=models.CharField(max_length=15,choices=options_state)
 
