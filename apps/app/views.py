@@ -96,9 +96,10 @@ def updateTask(request,id):
     formTask = TaskForm(instance=task)
 
     if request.method == 'POST':
-        form = TaskForm(request.POST,instance=task)
+        form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Tarea editada correctamente')
             return redirect('tasks')
         formTask['form'] = form
 
