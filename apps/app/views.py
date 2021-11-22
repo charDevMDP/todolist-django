@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, CategoryForm, TaskForm
 from apps.app.models import Category, Task
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -21,6 +23,7 @@ def addCategory(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Categoria creada correctamente')
             return redirect('categories')
         data['form'] = form
 
@@ -41,6 +44,7 @@ def register(request):
             user = authenticate(username = username, password = password)
             # inicio sesion usuario
             login(request, user)
+            messages.success(request, f'Usuario {username} creado correctamente')
             return redirect("home")
         data['form'] = form
 
@@ -73,6 +77,7 @@ def addTask(request):
             # asignamos el usuario logueado a la tarea
             task.owner = current_user
             task.save()
+            messages.success(request, f'Tarea creada correctamente')
             return redirect('tasks')
         formTask['form'] = form
 
@@ -81,6 +86,7 @@ def addTask(request):
 def deleteTask(request, id):
     task = get_object_or_404(Task, id=id)
     task.delete();
+    messages.success(request, f'Tarea eliminada correctamente')
     return redirect(to='tasks')
 
 def updateTask(request,id):
