@@ -11,8 +11,8 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Tareas</a>
+          <li class="nav-item {% if request.path == url %}active{% endif %}">
+            <a href="{% url 'tasks' %}" class="nav-link">Tareas</a>
           </li>
           <li class="nav-item {% if request.path == url %}active{% endif %}">
             <a href="{% url 'categories' %}" class="nav-link ">Categorias</a>

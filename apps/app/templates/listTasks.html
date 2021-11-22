@@ -1,0 +1,52 @@
+{% extends "./base.html" %}
+
+{% block body %}
+<div class="">
+    <div class="d-flex align-items-center">
+        <h1>Listado de Tareas</h1>
+        <div class="mx-2">
+            <a href="{% url 'addTask' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="" style="height: 40px;" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+              </svg>
+            </a>
+        </div>
+    </div>
+
+    {% if listTask %}
+
+    <div class="row mt-5">
+        {% for t in listTask %}
+
+        <div class="card border-secondary mb-3 mx-2 p-0" style="max-width: 18rem;">
+            
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>{{ t.state }}</div>
+                    <div class="p-1 rounded-pill px-2" style="background-color: #ccc;">#{{ t.category }}</div>
+                </div>
+            </div>
+
+            <div class="card-body text-secondary">
+              <h5 class="card-title">{{ t.title }}</h5>
+              <p class="card-text">{{ t.description }}</p>
+            </div>
+
+            <div class="card-footer d-flex justify-content-around" style="bottom: 0px;" >
+              <a href="{% url 'updateTask' t.id %}" class="btn btn-info btn-sm">Editar</a>
+              <a href="{% url 'deleteTask' t.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </div>
+
+          </div>
+
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center mt-5">
+        <p>TODAVIA NO HAY TAREAS CARGADAS</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
