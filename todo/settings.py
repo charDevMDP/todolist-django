@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'crispy_forms',
 	"crispy_bootstrap5",
     'apps.app',
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
 ]
 
 ## para que ande bootstrap y crispy
@@ -156,5 +157,6 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
