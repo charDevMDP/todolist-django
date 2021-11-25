@@ -28,7 +28,7 @@ class CategoryForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     title = forms.CharField(label='Titulo')
     description = forms.CharField(label='Descripcion')
-    #category = forms.ChoiceField(label='Seleccione una categoria',widget=forms.Select)
+    #category = forms.TypedChoiceField(label='Seleccione una categoria', widget=forms.Select)
     #state = forms.ChoiceField(label='Elige el estado inicial de la tarea')
     class Meta:
         model = Task
