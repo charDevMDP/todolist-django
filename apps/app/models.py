@@ -10,7 +10,7 @@ options_state = [
 # Create your models here.
 
 class Category(models.Model):
-    name=models.CharField(max_length=50)
+    name=models.CharField(max_length=50, primary_key=True)
     description=models.TextField()
 
     def __str__(self):
