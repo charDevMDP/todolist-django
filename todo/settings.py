@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
 	"crispy_bootstrap5",
-    'apps.app'
+    'apps.app',
+    'rest_framework'
 ]
 
 ## para que ande bootstrap y crispy
@@ -147,4 +148,13 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger'
 
+}
+
+# configuration api rest
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }

@@ -4,7 +4,8 @@ from .forms import UserRegisterForm, CategoryForm, TaskForm
 from apps.app.models import Category, Task
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from rest_framework import routers, serializers, viewsets
+from .serializers import TaskSerializer
 
 # Create your views here.
 
@@ -105,3 +106,9 @@ def updateTask(request,id):
 
 
     return render(request, 'updateTask.html', { 'form': formTask })
+
+# making an api
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
