@@ -1,0 +1,26 @@
+{% extends "./base.html" %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+<div>
+    <h1>Agregar Categoria</h1>
+
+    <div class="card mt-5">
+    <div class="card-body">
+        <form action="" method="POST">{% csrf_token %}
+           
+            {{ form | crispy }}
+
+         <div class="form-group mx-4 mb-2">
+            <button 
+            type="submit" 
+            class="btn w-100 btn-success btn-block text-white"
+            >Agregar</button>
+         </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
